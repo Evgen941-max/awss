@@ -7,7 +7,6 @@ env:
   AWS_REGION_NAME:          "us-west-2"
 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: 
      - master
@@ -26,7 +25,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id:     ${{ secrets.MY_AWS_ACCESS_KEY }}
-          aws_secret_access_key: ${{ secrets.MY_AWS_SECRET_KEY }}
+          aws-secret-access-key: ${{ secrets.MY_AWS_SECRET_KEY }}
           aws-region:            ${{ env.AWS_REGION_NAME }}
           
       - name: Copy deployment package to S3 Bucket
