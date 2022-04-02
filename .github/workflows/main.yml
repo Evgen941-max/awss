@@ -1,0 +1,23 @@
+name: CI-CD-Pipeline-to-AWS-ElasticBealstalk
+env:
+  EB_PACKAGE_S3_BUKET_NAME: "gitgub-actions-s3"
+  EB_APPLICATION_NAME:      "MyFlask"
+  EB_ENVIROMENT_NAME:       "MyFlask-env"
+  DEPLOY_PACKAGE_NAME:      "flask_app_${{ github.sha }}.zip"
+  AWS_REGION_NAME:          "us-west-2"
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: 
+     - master
+
+jobs:
+  my_ci_part:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone our repo
+        uses: actions/checkout@v3
+
+      - name: Create ZIP deployment packages
+        run: zip -r ${{ DEPLOY_PACKAGE_NAME }} ./ -x .git
